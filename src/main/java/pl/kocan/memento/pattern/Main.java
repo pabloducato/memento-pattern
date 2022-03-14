@@ -1,33 +1,28 @@
 package pl.kocan.memento.pattern;
 
 import pl.kocan.memento.pattern.smart.SmartApp;
+import pl.kocan.memento.pattern.smart.SmartAppCaretaker;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        SmartAppCaretaker smartAppCaretaker = new SmartAppCaretaker();
+
         SmartApp smartApp = new SmartApp();
 
-        smartApp.setVersion(1.0);
+        smartApp.changeVersion(1.0);
+        smartApp.changeVersion(1.1);
+        smartApp.changeVersion(1.2);
 
-        System.out.println(smartApp);
+        smartAppCaretaker.addMemento(smartApp.save());
 
-        smartApp.setVersion(1.1);
+        smartApp.changeVersion(1.3);
+        smartApp.changeVersion(1.4);
+        smartApp.changeVersion(2.0);
+        smartApp.changeVersion(2.1);
 
-        System.out.println(smartApp);
+        smartApp.load(smartAppCaretaker.getMemento(0));
 
-        smartApp.getDoubleList().add(1.1);
-
-        smartApp.setVersion(1.2);
-
-        System.out.println(smartApp);
-
-        smartApp.setVersion(2.0);
-
-        System.out.println(smartApp);
-
-        smartApp.setVersion(smartApp.getDoubleList().get(0));
-
-        System.out.println(smartApp);
     }
 }

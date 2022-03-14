@@ -1,29 +1,20 @@
 package pl.kocan.memento.pattern.smart;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SmartApp {
 
     private Double version;
-    private List<Double> doubleList = new ArrayList<>();
 
-    public void setVersion(Double version) {
+    public void changeVersion(Double version) {
         this.version = version;
+        System.out.println("Nowa wersja: " + this.version);
     }
 
-    public List<Double> getDoubleList() {
-        return doubleList;
+    public SmartAppMemento save() {
+        return new SmartAppMemento(this.version);
     }
 
-    public void setDoubleList(List<Double> doubleList) {
-        this.doubleList = doubleList;
+    public void load(SmartAppMemento smartAppMemento) {
+        this.version = smartAppMemento.getVersion();
     }
 
-    @Override
-    public String toString() {
-        return "SmartApp{" +
-                "version=" + version +
-                '}';
-    }
 }
